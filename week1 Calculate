@@ -1,0 +1,47 @@
+/*‧ 請編寫一個C程式，該程式包括一個名為 calculateNum 的副程式，
+該副程式接受一個整數陣列作為參數，並返回陣列元素的平均值
+與陣列的最大數與最小數。
+‧ 陣列中的數字包含至少6個數字。
+‧ 計算出平均值，請至少到小數點後兩位。
+‧ Please write a C program that includes a function named
+calculateNum. This function should take an integer array as a
+parameter and return the average, maximum, and minimum values of
+the array elements.
+‧ The array contains at least six numbers
+‧ Please calculate the average, and round it to at least two decimal places.*/
+#include<stdio.h>
+void calculateNum(int arr[],int size,int *max,int *min,float *ave){
+	//記得定義初值以免產生未定義之錯誤 
+	int sum=0;
+	*max=arr[0];
+	*min=arr[0];
+	for(int i=0;i<size;i++){
+		if(arr[i]>*max){
+			*max=arr[i];
+		}
+		if(arr[i]<*min){
+			*min=arr[i];
+		}
+		//sum=sum+arr[i]
+		sum+=arr[i];
+	}
+	//強制轉換型態float 
+	*ave=(float)sum/size;
+}
+int main(){
+	int arr[]={25,38,19,86,72,55};
+	//計算size
+	int size=sizeof(arr)/sizeof(arr[0]);
+	int max;
+	int min;
+	float ave;
+	//判斷是否符合題目條件 至少要有六個元素 
+	if(size<6){
+		printf("error");
+	}else{
+	//呼叫calculateNum 注意:***陣列即指標*** 
+		calculateNum(arr,size,&max,&min,&ave);
+		printf("最大數:%d\n最小數:%d\n平均值:%.2f",max,min,ave); 
+}
+	return 0;
+}
